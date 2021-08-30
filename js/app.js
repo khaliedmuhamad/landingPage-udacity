@@ -36,8 +36,8 @@ function removeClass(item, className) {
   item.classList.remove(className);
 }
 function inView(sec) {
-  let { top, bottom } = sec.getBoundingClientRect();
-  return top - navList.offsetHeight <= 0 && bottom + sec.offsetHeight >= 0;
+  let { top, bottom  } = sec.getBoundingClientRect();
+  return top - 52 <= 80  && bottom - 52 >= 80 ;
 }
 function downScroll(el) {
   window.scrollTo({
@@ -59,7 +59,6 @@ function downScroll(el) {
 function createNavItems(sections) {
   for (const section of sections) {
     const navItem = document.createElement("li");
-    let itemName = section.id;
     navItem.innerHTML = `<a href='#${section.id}' class='menu__link'>${section.dataset.nav}</a>`;
     navItem.addEventListener("click", () => {
       section.scrollIntoView({ behavior: "smooth" });
@@ -74,10 +73,11 @@ function addActive(sections) {
     document.addEventListener("scroll", () => {
       if (inView(section)) {
         if (!section.classList.contains("active")) {
-          addClass(section, "active") || addClass(section, "active");
+          addClass(section, "active");
+          console.log(section.id ,section.getBoundingClientRect());
         }
       } else {
-        removeClass(section, "active") || removeClass(section, "active");
+        removeClass(section, "active");
       }
     });
   }
