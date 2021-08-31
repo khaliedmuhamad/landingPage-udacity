@@ -89,6 +89,7 @@ function goToSection(els) {
     const id = navLink.hash.substring(1);
     const connectSection = document.getElementById(id);
     navLink.addEventListener("click", () => {
+      preventDefault();
       window.scrollTo({
         top: connectSection.offsetHeight,
         behavior: "smooth",
