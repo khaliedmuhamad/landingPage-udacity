@@ -74,7 +74,6 @@ function addActive(sections) {
       if (inView(section)) {
         if (!section.classList.contains("active")) {
           addClass(section, "active");
-          console.log(section.id ,section.getBoundingClientRect());
         }
       } else {
         removeClass(section, "active");
@@ -89,7 +88,6 @@ function goToSection(els) {
     const id = navLink.hash.substring(1);
     const connectSection = document.getElementById(id);
     navLink.addEventListener("click", () => {
-      preventDefault();
       window.scrollTo({
         top: connectSection.offsetHeight,
         behavior: "smooth",
