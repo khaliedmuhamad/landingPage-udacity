@@ -27,7 +27,6 @@ let navLinks;
  */
 catchNavLinks = async () => {
   navLinks = document.querySelectorAll(".menu__link");
-  goToSection(navLinks);
 };
 function addClass(item, className) {
   item.classList.add(className);
@@ -59,9 +58,13 @@ function downScroll(el) {
 function createNavItems(sections) {
   for (const section of sections) {
     const navItem = document.createElement("li");
-    navItem.innerHTML = `<a href='#${section.id}' class='menu__link'>${section.dataset.nav}</a>`;
-    navItem.addEventListener("click", () => {
-      section.scrollIntoView({ behavior: "smooth" });
+    navItem.innerHTML = `<a href='#' data-name='${section.id}' class='menu__link'>${section.dataset.nav}</a>`;
+    
+    navItem.addEventListener("click", (e) => {
+      e.preventDefault();
+      goToSection(e.target.dataset.name);
+      console.log(e)
+      
     });
     navList.appendChild(navItem);
   }
@@ -83,18 +86,15 @@ function addActive(sections) {
 }
 
 // Scroll to anchor ID using scrollTO event
-function goToSection(els) {
-  for (const navLink of els) {
-    const id = navLink.hash.substring(1);
-    const connectSection = document.getElementById(id);
-    navLink.addEventListener("click", () => {
-      window.scrollTo({
-        top: connectSection.offsetHeight,
-        behavior: "smooth",
-      });
-    });
-  }
+function goToSection(el) {
+  const elSection = document.getElementById(el)
+  console.log(elSection);
+  window.scrollTo({
+    top:elSection.offsetTop,
+    behavior: 'smooth'
+   })
 }
+
 
 /**
  * End Main Functions
